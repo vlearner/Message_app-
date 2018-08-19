@@ -1,6 +1,8 @@
 $(() => {
     $("#send").click(() => {
-        addMessages({name: 'Time', message: 'hello'});
+        var message = { name: $("#name").val(), message: $("#message").val()}
+        postMessage(message);
+        // addMessages({name: 'Time', message: 'hello'});
     })
     getMessages();
 })
@@ -21,4 +23,9 @@ function getMessages(){
     $.get('http://localhost:4550/messages', (data) => {
         data.forEach(addMessages);
     })
+}
+
+function postMessage(message){
+    $.post('http://localhost:4550/messages', message)
+
 }

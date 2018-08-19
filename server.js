@@ -4,12 +4,13 @@ var app = express();
 
 app.use(express.static(__dirname));
 app.use(bodyParser.json());
+// Need urlencoded for displaying message on front side
+app.use(bodyParser.urlencoded({extended: false}))
 
 var messages = [
     {name: 'Tim', message: 'Hi'},
     {name: 'Ben', message: 'Hello'},
-    {name: 'Matt', message: 'Hi everyone'},
-    {name: 'kat', message: 'Hello'},
+
 ]
 
 app.get('/messages', (req, res) => {
