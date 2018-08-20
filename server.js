@@ -21,9 +21,14 @@ app.get('/messages', (req, res) => {
 
 app.post('/messages', (req, res) => {
     messages.push(req.body); 
+    io.emit('message', req.body)
     res.sendStatus(200);
 })
 
-var server = app.listen(4550, () => {
+io.on('connection', (socket) => {
+    console.log('a user connected')
+})
+
+var server = http.listen(4550, () => {
     console.log('Server is listening on Port', server.address().port )
 });
